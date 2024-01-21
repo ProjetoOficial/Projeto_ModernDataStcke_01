@@ -29,24 +29,24 @@ up() {
 
 config() {
 
-  echo "Connecting Airflow with Airbyte..."
-  echo "Enter your Airbyte Epidemiology connection ID: "
-  read epidemiology_connection_id
+#  echo "Connecting Airflow with Airbyte..."
+#  echo "Enter your Airbyte Epidemiology connection ID: "
+#  read epidemiology_connection_id
 
-  echo "Enter your Airbyte Economy connection ID: "
-  read economy_connection_id
+#  echo "Enter your Airbyte Economy connection ID: "
+#  read economy_connection_id
 
-  echo "Enter your Airbyte Demographics connection ID: "
-  read demographics_connection_id
+#  echo "Enter your Airbyte Demographics connection ID: "
+#  read demographics_connection_id
 
   echo "Enter your Airbyte Index connection ID: "
   read index_connection_id
 
   # Set connection IDs for DAG.
   cd airflow
-  docker-compose run airflow-webserver airflow variables set 'AIRBYTE_EPIDEMIOLOGY_CONNECTION_ID' "$epidemiology_connection_id"
-  docker-compose run airflow-webserver airflow variables set 'AIRBYTE_ECONOMY_CONNECTION_ID' "$economy_connection_id"
-  docker-compose run airflow-webserver airflow variables set 'AIRBYTE_DEMOGRAPHICS_CONNECTION_ID' "$demographics_connection_id"
+  # docker-compose run airflow-webserver airflow variables set 'AIRBYTE_EPIDEMIOLOGY_CONNECTION_ID' "$epidemiology_connection_id"
+  # docker-compose run airflow-webserver airflow variables set 'AIRBYTE_ECONOMY_CONNECTION_ID' "$economy_connection_id"
+  # docker-compose run airflow-webserver airflow variables set 'AIRBYTE_DEMOGRAPHICS_CONNECTION_ID' "$demographics_connection_id"
   docker-compose run airflow-webserver airflow variables set 'AIRBYTE_INDEX_CONNECTION_ID' "$index_connection_id"
 
   docker network create modern-data-stack
@@ -58,7 +58,7 @@ config() {
   
   cd airflow
   #Sem Login e Password
-  docker-compose run airflow-webserver airflow connections add 'airbyte_example' --conn-uri 'airbyte://airbyte-proxy:8000'
+  # docker-compose run airflow-webserver airflow connections add 'airbyte_example' --conn-uri 'airbyte://airbyte-proxy:8000'
   #Com Login e Password
   docker-compose run airflow-webserver airflow connections add 'airbyte_example' --conn-uri "airbyte://airbyte:password@airbyte-proxy:8000"
   
